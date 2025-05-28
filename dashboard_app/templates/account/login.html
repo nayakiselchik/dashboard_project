@@ -1,0 +1,20 @@
+{% load static socialaccount %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{% static 'dashboard_app/styles.css' %}">
+  <title>Sign in</title>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <h2>Sign in with Discord</h2>
+      <a class="login-button"
+       href="{% provider_login_url 'discord' process='login' %}">
+      Continue with Discord
+      </a>
+    </div>
+  </div>
+</body>
+</html>

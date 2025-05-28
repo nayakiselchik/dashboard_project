@@ -1,0 +1,27 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Login Cancelled</title>
+  <link
+    rel="stylesheet"
+    href="{% static 'dashboard_app/styles.css' %}"
+    type="text/css"
+  >
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <h2>Login Cancelled</h2>
+      <p>You cancelled the Discord login process.</p>
+      <a
+        class="login-button"
+        href="{% url 'account_login' %}"
+      >
+        Back to Login
+      </a>
+    </div>
+  </div>
+</body>
+</html>

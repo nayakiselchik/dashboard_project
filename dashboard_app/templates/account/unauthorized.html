@@ -1,0 +1,27 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Unauthorized</title>
+  <link
+    rel="stylesheet"
+    href="{% static 'dashboard_app/styles.css' %}"
+    type="text/css"
+  >
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <h2>Unauthorized Account</h2>
+      <p>Your Discord account is not on the whitelist.</p>
+      <button
+        class="login-button"
+        onclick="window.location.href='{% url 'account_login' %}';"
+      >
+        Back to Login
+      </button>
+    </div>
+  </div>
+</body>
+</html>

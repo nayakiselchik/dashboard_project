@@ -1,0 +1,28 @@
+{# dashboard_app/templates/socialaccount/login_error.html #}
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Login Error</title>
+  <link rel="stylesheet"
+        href="{% static 'dashboard_app/styles.css' %}"
+        type="text/css">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <h2>Login Error</h2>
+      {% if error_message %}
+        <p>{{ error_message }}</p>
+      {% else %}
+        <p>An error occurred during login.</p>
+      {% endif %}
+      <button class="login-button"
+              onclick="window.location.href='{% url 'account_login' %}'">
+        Back to Login
+      </button>
+    </div>
+  </div>
+</body>
+</html>

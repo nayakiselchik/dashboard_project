@@ -1,0 +1,20 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{% static 'dashboard_app/styles.css' %}">
+  <title>Sign up closed</title>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <h2>Registration Closed</h2>
+      <p>New user sign-up is disabled. Please sign in with Discord.</p>
+      <a class="login-button" href="{% provider_login_url 'discord' %}">
+        Sign in with Discord
+      </a>
+    </div>
+  </div>
+</body>
+</html>

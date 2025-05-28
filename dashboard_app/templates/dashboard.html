@@ -1,0 +1,51 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{% static 'dashboard_app/styles.css' %}">
+</head>
+<body>
+  <header>
+    <h1>Ticket Dashboard</h1>
+    <a href="{% url 'account_logout' %}" class="logout-button">Logout</a>
+  </header>
+  <main>
+    <div class="grid">
+      {% for t in tickets %}
+        <a
+          id="ticket-{{ t.channel_id }}"
+          href="{% url 'ticket_click' t.channel_id %}"
+          class="ticket {% if t.has_unread %}red{% endif %}"
+        >
+          {{ t.name }}
+        </a>
+      {% endfor %}
+    </div>
+  </main>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const apiURL = "{% url 'ticket_status' %}";
+
+  async function refreshTickets() {
+    try {
+      const res = await fetch(apiURL);
+      const { tickets } = await res.json();
+      tickets.forEach(t => {
+        const el = document.getElementById(`ticket-${t.channel_id}`);
+        if (el) el.classList.toggle("red", t.has_unread);
+      });
+    } catch (err) {
+      console.error("Failed to fetch tickets:", err);
+    }
+  }
+
+  // initial load + repeat every 3 seconds
+  refreshTickets();
+  setInterval(refreshTickets, 3000);
+});
+</script>
+
+
+</body>
+</html>
