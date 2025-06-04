@@ -72,6 +72,7 @@ DATABASES = {
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "dashboard_app" / "static"]
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # Force all cookies (session, CSRF) to require HTTPS
