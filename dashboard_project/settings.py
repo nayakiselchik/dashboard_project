@@ -7,7 +7,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = True
-ALLOWED_HOSTS = ["your.domain.com", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["dashboard.cyber-lab.com.ua", "10.60.6.14"]
 
 INSTALLED_APPS = [
     # core Django
