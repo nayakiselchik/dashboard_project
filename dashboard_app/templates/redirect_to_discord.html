@@ -33,19 +33,33 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     button:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    background-color: rgba(88, 101, 242, 0.1);
+      transform: translateY(-4px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      background-color: rgba(88, 101, 242, 0.1);
+    }
+    a {
+      color: #5865F2;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <main>
     <h1>Opening Discord…</h1>
-    <p>If Discord didn’t open automatically, <a href="{{ web_url }}">click here</a> to open it in your browser.</p>
     <p>
-<!--      <a href="{{ web_url }}">Manual Web Discord</a>-->
-      <button onclick="location.href='{% url 'dashboard' %}'">Return to Dashboard</button>
+      If Discord didn’t open automatically,
+      <a href="{{ web_url }}" target="_blank" rel="noopener noreferrer">
+        click here
+      </a> to open it in your browser.
+    </p>
+    <p>
+      <button onclick="location.href='{% url 'dashboard' %}'">
+        Return to Dashboard
+      </button>
     </p>
   </main>
 
