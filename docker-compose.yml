@@ -5,13 +5,18 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: gunicorn dashboard_project.wsgi:application --bind 0.0.0.0:8000
-    ports:
-      - "8000:8000"
-    volumes:
-      - .:/app
+    # Before starting Gunicorn, collect static into /app/staticfiles
+    command: >
+      sh -c "python manage.py collectstatic --noinput &&
+             gunicorn dashboard_project.wsgi:application --bind 0.0.0.0:8000"
     env_file:
       - .env
+    # Expose only to other services (nginx). Do NOT publish 8000 on the host.
+    expose:
+      - "8000"
+    volumes:
+      - static_volume:/app/staticfiles
+      - .:/app   # keep project code mounted for migrations, etc.
     depends_on:
       - bot
 
@@ -22,4 +27,26 @@ services:
     env_file:
       - .env
     volumes:
-      - .:/app
+      - .:/app   # so bot.py sees your code and settings
+
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - web
+    volumes:
+      # Mount your cert/key from the VM into the container:
+      - /home/ubuntu/certs/server.crt:/etc/nginx/certs/server.crt:ro
+      - /home/ubuntu/certs/server.key:/etc/nginx/certs/server.key:ro
+
+      # Mount our custom nginx.conf:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+
+      # Share the staticfiles volume so Nginx can serve /static/ itself:
+      - static_volume:/app/staticfiles
+    restart: always
+
+volumes:
+  static_volume:
