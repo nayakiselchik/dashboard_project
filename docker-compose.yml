@@ -38,7 +38,7 @@ services:
       # Mount your cert/key from the VM into the container:
       - /home/ubuntu/certs/server.crt:/etc/nginx/certs/server.crt:ro
       - /home/ubuntu/certs/server.key:/etc/nginx/certs/server.key:ro
-
+      - ./dashboard_app/static/:/app/dashboard_app/static/:ro
       # Mount our custom nginx.conf:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
 
